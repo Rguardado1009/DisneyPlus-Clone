@@ -4,28 +4,34 @@ function Details() {
   return (
     <Container>
       <Background>
-        <img src="https://images5.alphacoders.com/119/thumb-1920-1194764.png" />
+        <img
+          src="https://images5.alphacoders.com/119/thumb-1920-1194764.png"
+          alt=""
+        />
       </Background>
       <ImageTitle>
-        <img src="https://lumiere-a.akamaihd.net/v1/images/the-mandalorian-s2-logo-1200-notext_345f4acf.png?region=0,0,1200,376" />
+        <img
+          src="https://lumiere-a.akamaihd.net/v1/images/the-mandalorian-s2-logo-1200-notext_345f4acf.png?region=0,0,1200,376"
+          alt=""
+        />
       </ImageTitle>
       <Controls>
         <PlayButton>
-          <img src="/images/play-icon-black.png" />
+          <img src="/images/play-icon-black.png" alt="" />
           <span>PLAY</span>
         </PlayButton>
         <TrailerButton>
-          <img src="/images/play-icon-white.png" />
+          <img src="/images/play-icon-white.png" alt="" />
           <span>Trailer</span>
         </TrailerButton>
         <AddButton>
           <span>+</span>
         </AddButton>
         <GroupWatchButton>
-          <img src="/images/group-icon.png" />
+          <img src="/images/group-icon.png" alt="" />
         </GroupWatchButton>
       </Controls>
-      <Subtitle>2019-2020 · 2 Seasons</Subtitle>
+      <Subtitle> 2019-2020 · 2 Seasons</Subtitle>
       <Description>
         In the lawless aftermath of the collapse of the Galactic Empire, an
         armored bounty hunter known only as The Mandalorian takes ona
@@ -126,13 +132,14 @@ const GroupWatchButton = styled(AddButton)`
 
 const Subtitle = styled.div`
   color: rgb(249, 249, 249);
-  font-size: 15px;
+  font-size: 12px;
   min-height: 20px;
   margin-top: 26px;
 `;
 const Description = styled.div`
   line-height: 1.4;
-  font-size: 20px;
+  font-size: 16px;
   margin-top: 16px;
   color: rgb(249, 249, 249);
+  max-width: 760px;
 `;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Movies from "./Movies.js";
 import Slide from "./Slide.js";
 import Viewers from "./Viewers.js";
+
 function Home() {
   return (
     <Container>

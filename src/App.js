@@ -4,12 +4,14 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header.js";
 import Home from "./components/Home";
 import Details from "./components/Details.js";
+import Login from "./components/Login";
 
 function App() {
   return (
     <div className="App">
       <Header />
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/detail" element={<Details />} />
         <Route path="/" element={<Home />} />
       </Routes>

@@ -55,6 +55,8 @@ const NavMenu = styled.div`
   flex: 1;
   margin-left: 20px;
   align-items: center;
+  flex-wrap: wrap;
+  flex-flow: row wrap;
   a {
     display: flex;
     align-items: center;
