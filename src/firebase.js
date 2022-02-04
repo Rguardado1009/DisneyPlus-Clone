@@ -1,3 +1,8 @@
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { GoogleAuthProvider, getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
+
 const firebaseConfig = {
   apiKey: "AIzaSyB1X_qnxnXvNMa3CeBzVmlzAywLVK_NfP4",
   authDomain: "disney-clone-react-397b8.firebaseapp.com",
@@ -8,11 +13,11 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebaseApp.firestore();
-const auth = firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider();
-const storage = firebase.storage();
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore();
+const auth = getAuth(firebaseApp);
+const provider = new GoogleAuthProvider();
+const storage = getStorage();
 
 export { auth, provider, storage };
 export default db;

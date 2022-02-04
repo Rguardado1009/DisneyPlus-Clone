@@ -1,42 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import { getDoc, doc, onSnapshot } from "firebase/firestore";
+import db from "../firebase";
+
 function Details() {
+  const { id } = useParams();
+  const [movie, setMovie] = useState([]);
+
+  useEffect(() => {
+    const docRef = doc(db, "movies", `${id}`);
+    console.log(
+      getDoc(docRef).then((doc) => {
+        setMovie(doc.data());
+      })
+    );
+  }, []);
+  console.log(movie);
+  
   return (
     <Container>
-      <Background>
-        <img
-          src="https://images5.alphacoders.com/119/thumb-1920-1194764.png"
-          alt=""
-        />
-      </Background>
-      <ImageTitle>
-        <img
-          src="https://lumiere-a.akamaihd.net/v1/images/the-mandalorian-s2-logo-1200-notext_345f4acf.png?region=0,0,1200,376"
-          alt=""
-        />
-      </ImageTitle>
-      <Controls>
-        <PlayButton>
-          <img src="/images/play-icon-black.png" alt="" />
-          <span>PLAY</span>
-        </PlayButton>
-        <TrailerButton>
-          <img src="/images/play-icon-white.png" alt="" />
-          <span>Trailer</span>
-        </TrailerButton>
-        <AddButton>
-          <span>+</span>
-        </AddButton>
-        <GroupWatchButton>
-          <img src="/images/group-icon.png" alt="" />
-        </GroupWatchButton>
-      </Controls>
-      <Subtitle> 2019-2020 · 2 Seasons</Subtitle>
-      <Description>
-        In the lawless aftermath of the collapse of the Galactic Empire, an
-        armored bounty hunter known only as The Mandalorian takes ona
-        well-paying yet cryptic assignment
-      </Description>
+      {movie && (
+        <>
+          {" "}
+          <Background>
+            <img src={movie.backgroundImg} alt="" />
+          </Background>
+          <ImageTitle>
+            <img src={movie.titleImg} alt="" />
+          </ImageTitle>
+          <Controls>
+            <PlayButton>
+              <img src="/images/play-icon-black.png" alt="" />
+              <span>PLAY</span>
+            </PlayButton>
+            <TrailerButton>
+              <img src="/images/play-icon-white.png" alt="" />
+              <span>Trailer</span>
+            </TrailerButton>
+            <AddButton>
+              <span>+</span>
+            </AddButton>
+            <GroupWatchButton>
+              <img src="/images/group-icon.png" alt="" />
+            </GroupWatchButton>
+          </Controls>
+          <Subtitle> {movie.subTitle}</Subtitle>
+          <Description>{movie.description}</Description>
+        </>
+      )}
     </Container>
   );
 }

@@ -1,58 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+import { selectMovies } from "../features/movie/movieSlice";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 function Movies() {
+  const movies = useSelector(selectMovies);
+
   return (
     <Container>
       <h4>Recommended for You</h4>
       <Content>
-        <Wrap>
-          <img
-            src="https://images.thedirect.com/media/article_full/shang-chi-review-mcu.jpg"
-            alt=""
-          />
-        </Wrap>
-        <Wrap>
-          <img
-            src="https://flxt.tmsimg.com/assets/p18535690_b_h8_ac.jpg"
-            alt=""
-          />
-        </Wrap>
-        <Wrap>
-          <img
-            src="https://cdn.flickeringmyth.com/wp-content/uploads/2021/11/Hawkeye-1-600x739-1.jpg"
-            alt=""
-          />
-        </Wrap>
-        <Wrap>
-          <img
-            src="https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/5091/875091-h"
-            alt=""
-          />
-        </Wrap>
-        <Wrap>
-          <img
-            src="https://images.thedirect.com/media/article_full/shang-chi-review-mcu.jpg"
-            alt=""
-          />
-        </Wrap>
-        <Wrap>
-          <img
-            src="https://flxt.tmsimg.com/assets/p18535690_b_h8_ac.jpg"
-            alt=""
-          />
-        </Wrap>
-        <Wrap>
-          <img
-            src="https://cdn.flickeringmyth.com/wp-content/uploads/2021/11/Hawkeye-1-600x739-1.jpg"
-            alt=""
-          />
-        </Wrap>
-        <Wrap>
-          <img
-            src="https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/5091/875091-h"
-            alt=""
-          />
-        </Wrap>
+        {movies &&
+          movies.map((movie) => (
+            <Wrap key={movie.id}>
+              <Link to={`/detail/${movie.id}`}>
+                <img src={movie.cardImg} alt="" />
+              </Link>
+            </Wrap>
+          ))}
       </Content>
     </Container>
   );

@@ -21,9 +21,6 @@ function Slide() {
       <Wrap>
         <img src="/images/slider-badag.jpg" alt="2" />
       </Wrap>
-      <Wrap>
-        <img src="/images/slider-badag.jpg" alt="2" />
-      </Wrap>
     </Carousel>
   );
 }

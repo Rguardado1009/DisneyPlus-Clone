@@ -1,18 +1,72 @@
-import React from "react";
+import { React, useEffect } from "react";
 import styled from "styled-components";
-import { selectUserName, selectUserPhoto } from "../features/user/userSlice";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  selectUserName,
+  selectUserPhoto,
+  setUserLogin,
+  setSignOut,
+} from "../features/user/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { auth, provider } from "../firebase";
+import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 
 function Header() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userName = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
-  const signIn = () => {};
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(
+          setUserLogin({
+            name: user.displayName,
+            photo: user.photoUrl,
+            email: user.email,
+          })
+        );
+        navigate("/");
+      }
+    });
+  }, []);
+
+  const signIn = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        let user = result.user;
+        console.log(result);
+        dispatch(
+          setUserLogin({
+            name: user.displayName,
+            photo: user.photoUrl,
+            email: user.email,
+          })
+        );
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const logOut = () => {
+    signOut(auth)
+      .then(() => {
+        dispatch(setSignOut);
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
   return (
     <Nav>
       <Logo src="/images/logo.svg" />
       {!userName ? (
         <LoginContainer>
-          <Login>Login</Login>
+          <Login onClick={signIn}>Login</Login>
         </LoginContainer>
       ) : (
         <>
@@ -42,7 +96,7 @@ function Header() {
               <span> SERIES</span>
             </a>
           </NavMenu>
-          <UserImg src="/images/rg-logo.jpg" />
+          <UserImg onClick={logOut} src={userPhoto} />
         </>
       )}
     </Nav>
